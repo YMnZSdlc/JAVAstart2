@@ -27,6 +27,20 @@ public class ArrayListVsLinkedList {
 
         sumAllElementsUsedForI(linkedList);
         sumAllElementsUsedForI(arrayList);
+
+        long start = System.currentTimeMillis();
+        arrayList.stream() //to jest to samo
+                .mapToInt(e->e)
+                .sum();
+
+        arrayList.stream() // co to tylko inaczej zapisane
+                .reduce((a,b)->a+b).get(); //suma zapisywana w następnym kroku do a, b pobiera następny element
+                                            //get() kończy strumień
+        arrayList.stream()
+                .mapToInt(e->e)
+                .sum();
+        System.out.println(System.currentTimeMillis()-start);
+
     }
 
     private static void sumAllElementsUsedForI(List<Integer> list) {
@@ -36,11 +50,11 @@ public class ArrayListVsLinkedList {
             sum += list.get(i);
         }
         long finish = System.currentTimeMillis();
-        System.out.println("Wykonanie sumowania po indeksie z for i trwało: "
+        System.out.println("Wykonanie sumowania w pętli for trwało: "
                 + (finish - start)
                 + "ms dla "
                 + list.getClass().getSimpleName()
-                + "Suma to: " + sum);
+                + " Suma to: " + sum);
     }
 
     private static void sumAllElementsUsedForEach(List<Integer> list) {
@@ -50,11 +64,11 @@ public class ArrayListVsLinkedList {
             sum += elementFormList;
         }
         long finish = System.currentTimeMillis();
-        System.out.println("Wykonanie sumowania po indeksie z for each trwało: "
+        System.out.println("Wykonanie sumowania w pętli foreach trwało: "
                 + (finish - start)
                 + "ms dla "
                 + list.getClass().getSimpleName()
-                + "Suma to: " + sum);
+                + " Suma to: " + sum);
 
     }
 
