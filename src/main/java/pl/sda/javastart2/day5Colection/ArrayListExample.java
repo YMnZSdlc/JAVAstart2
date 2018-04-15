@@ -2,18 +2,41 @@ package pl.sda.javastart2.day5Colection;
 
 import pl.sda.javastart2.day5enums.Person;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import javax.swing.text.html.HTMLDocument;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ArrayListExample {
     public static void main(String[] args) {
-        basicListOperaton();
-        doesContainAll();
-        sortList();
+//        basicListOperaton();
+//        doesContainAll();
+//        sortList();
 
+        legacyUseOfIteration();
+
+
+    }
+// stary sposób iteracji po kolekcji List
+    private static void legacyUseOfIteration() {
+        List<String> arrayList = new ArrayList<>();
+        arrayList.add("a");
+        arrayList.add("b");
+        arrayList.add("c");
+
+        System.out.println(arrayList);
+        // stara metod
+        Iterator iterator = arrayList.iterator();
+        while (iterator.hasNext()){
+            Object next = iterator.next();
+            System.out.println(next);
+        }
+        //nowsza lepsza
+        for (String s : arrayList) {
+            System.out.println(s);
+        }
+        // najnowsza na strimach
+        arrayList.stream()
+                .forEach(e-> System.out.println(e));
 
     }
 
@@ -43,17 +66,18 @@ public class ArrayListExample {
         String result = people.stream()
 //                .sorted(Comparator.comparing(Person::getPesel)) //inny sposó sortowanai po pesel
                 .sorted((a, b) -> a.getPesel().compareTo(b.getPesel())) //strumień ludzi z podniem przepisu na porównanie pesel
-                .map(e -> e.getName()) //zmiana typu na String ale już imiona
+                .map(e -> e.getName()) //zmiana typu z Person na String ale już imiona
                 .collect(Collectors.joining(", "));
         System.out.println(result);
 
+//        Wszystko co implementuje Collection umożliwia korzystanie ze stream. Stream to otwarcie potoku danych.
         List<Integer> pesels =
-                people.stream()
+                people.stream() //strumień ludzi z listy people
                         .filter(person -> !person.getName().equals("Adam"))
                         .sorted((firstPerson, seconPerson) -> firstPerson.getName().compareTo(seconPerson.getName()))
-                        .map(person -> person.getPesel())
-                        .collect(Collectors.toList());
-        System.out.println(pesels);
+                        .map(person -> person.getPesel()) //zmiana typu (opcjonalna) na String
+                        .collect(Collectors.toList()); //collect czyli zbieranie do listy toList przy pomocy Collectors
+        System.out.println(pesels);     //colect jest funkcją kończącą strima, są też inne jak foreach
 
 
     }
