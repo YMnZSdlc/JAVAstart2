@@ -8,7 +8,16 @@ import java.util.List;
 
 public class Generics2Main {
     public static void main(String[] args) {
+        firstGenericExample();
+        secondGenericExample();
+
         utilsExample();
+    }
+
+    private static void secondGenericExample() {
+    }
+
+    private static void firstGenericExample() {
     }
 
     private static void utilsExample() {

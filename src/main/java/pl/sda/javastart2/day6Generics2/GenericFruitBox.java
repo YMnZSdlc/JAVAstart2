@@ -1,6 +1,6 @@
 package pl.sda.javastart2.day6Generics2;
 
-public class Box <T> {
+public class GenericFruitBox<T> {
 
     private T value;
 
@@ -8,7 +8,7 @@ public class Box <T> {
         return value;
     }
 
-    public Box(T value) {
+    public GenericFruitBox(T value) {
         this.value = value;
     }
 
