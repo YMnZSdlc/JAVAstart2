@@ -65,7 +65,7 @@ public class ArrayListExample {
 
         String result = people.stream()
 //                .sorted(Comparator.comparing(Person::getPesel)) //inny sposó sortowanai po pesel
-                .sorted((a, b) -> a.getPesel().compareTo(b.getPesel())) //strumień ludzi z podniem przepisu na porównanie pesel
+                .sorted((a, b) -> a.getPesel().compareTo(b.getPesel())) //strumień ludzi z podaniem przepisu na porównanie pesel
                 .map(e -> e.getName()) //zmiana typu z Person na String ale już imiona
                 .collect(Collectors.joining(", "));
         System.out.println(result);

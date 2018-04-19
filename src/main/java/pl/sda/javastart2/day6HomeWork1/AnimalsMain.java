@@ -1,6 +1,10 @@
 package pl.sda.javastart2.day6HomeWork1;
 
+import java.lang.reflect.Array;
 import java.util.*;
+import java.util.stream.Collectors;
+
+import static com.sun.jmx.snmp.ThreadContext.contains;
 
 public class AnimalsMain {
     public static void main(String[] args) {
@@ -25,16 +29,22 @@ public class AnimalsMain {
 //        LastMethodFormTaskStram(animals);
 
         printArray(animals);
-        System.out.println(ArrayToListNoTabArrayOrderLoop(animals));
-        System.out.println(ArrayToListNoTabStringOrderLoop(animals));
-        System.out.println(ArrayToListNoTabStringOrderNoDuplicateLoop(animals));
-        System.out.println(ArrayToListNoTabNoDuplicateLoop(animals));
-        System.out.println(ArrayToSetArrayOrderNoDuplicateLoop(animals));
-        System.out.println("Ile jest dog: "+ howManyElementInArrayToListLoop(animals, "dog"));
-        System.out.println("Ile jest cat: "+ howManyElementInArrayToListLoop(animals, "cat"));
-        System.out.println("Ile jest pig: "+ howManyElementInArrayToListLoop(animals, "pig"));
-        System.out.println("Ile jest rabbit: "+ howManyElementInArrayToListLoop(animals, "rabbit"));
-        System.out.println("Ile jest olifant: "+ howManyElementInArrayToListLoop(animals, "olifant"));
+//        System.out.println(ArrayToListNoTabArrayOrderLoop(animals));
+//        System.out.println(ArrayToListNoTabStringOrderLoop(animals));
+//        System.out.println(ArrayToListNoTabStringOrderNoDuplicateLoop(animals));
+//        System.out.println(ArrayToListNoTabNoDuplicateLoop(animals));
+//        System.out.println(ArrayToSetArrayOrderNoDuplicateLoop(animals));
+//        System.out.println("Ile jest dog: "+ howManyElementInArrayToListLoop(animals, "dog"));
+//        System.out.println("Ile jest cat: "+ howManyElementInArrayToListLoop(animals, "cat"));
+//        System.out.println("Ile jest pig: "+ howManyElementInArrayToListLoop(animals, "pig"));
+//        System.out.println("Ile jest rabbit: "+ howManyElementInArrayToListLoop(animals, "rabbit"));
+//        System.out.println("Ile jest olifant: "+ howManyElementInArrayToListLoop(animals, "olifant"));
+        System.out.println(ArrayToListNoTabArrayOrderStream(animals));
+        System.out.println(ArrayToListNoTabStringOrderStream(animals));
+        System.out.println(ArrayToListNoTabStringOrderNoDuplicateStream(animals));
+        System.out.println(ArrayToListNoTabNoDuplicateStream(animals));
+        System.out.println(ArrayToSetArrayOrderNoDuplicateStream(animals));
+
     }
 
     private static void printArray(String[] animals) {
@@ -55,6 +65,53 @@ public class AnimalsMain {
         }
         return result;
     }
+
+    private static List<String> ArrayToListNoTabArrayOrderStream(String[] animalsArray) {
+        List<String> result = Arrays.stream(animalsArray)
+                .map(e -> e.replaceAll("[- ]", ""))
+                .filter(e -> !e.equals(""))
+                .collect(Collectors.toList());
+        return result;
+    }
+
+    private static List<String> ArrayToListNoTabStringOrderStream(String[] animalsArray) {
+        List<String> result = Arrays.stream(animalsArray)
+                .map(e -> e.replaceAll("[- ]", ""))
+                .filter(e -> !e.equals(""))
+                .sorted()
+                .collect(Collectors.toList());
+        return result;
+    }
+
+    private static List<String> ArrayToListNoTabStringOrderNoDuplicateStream(String[] animalsArray) {
+        List<String> result = Arrays.stream(animalsArray)
+                .map(e -> e.replaceAll("[- ]", ""))
+                .filter(e -> !e.equals(""))
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
+        return result;
+    }
+
+    private static List<String> ArrayToListNoTabNoDuplicateStream(String[] animalsArray) {
+        List<String> result = Arrays.stream(animalsArray)
+                .map(e -> e.replaceAll("[- ]", ""))
+                .filter(e -> !e.equals(""))
+                .distinct()
+                .collect(Collectors.toList());
+        return result;
+    }
+
+    private static Set<String> ArrayToSetArrayOrderNoDuplicateStream(String[] animalsArray) {
+        Set<String> result = new LinkedHashSet<>();
+        result = Arrays.stream(animalsArray)
+                .map(e -> e.replaceAll("[- ]", ""))
+                .filter(e -> !e.equals(""))
+                .distinct()
+                .collect(Collectors.toSet());
+        return result;
+    }
+
 
     private static List<String> ArrayToListNoTabStringOrderLoop(String[] animalsArray) {
         List<String> result = new ArrayList<>();
@@ -84,7 +141,7 @@ public class AnimalsMain {
 
     private static Set<String> ArrayToSetArrayOrderNoDuplicateLoop(String[] animalsArray) {
         Set<String> result = new LinkedHashSet<>();
-        for (String animal : animalsArray){
+        for (String animal : animalsArray) {
             if (animal.trim().length() >= 1) {
                 result.add(animal.trim());
             }
@@ -97,8 +154,8 @@ public class AnimalsMain {
         result = ArrayToListNoTabArrayOrderLoop(animals);
         int howMany = 0;
         for (String s : result) {
-            if (s.equals(stringToCount)){
-                howMany +=1;
+            if (s.equals(stringToCount)) {
+                howMany += 1;
             }
         }
         return howMany;
