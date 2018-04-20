@@ -56,16 +56,6 @@ public class AnimalsMain {
         }
     }
 
-    private static List<String> ArrayToListNoTabArrayOrderLoop(String[] animalsArray) {
-        List<String> result = new ArrayList<>();
-        for (String animal : animalsArray) {
-            if (animal.trim().length() >= 1) {
-                result.add(animal.trim());
-            }
-        }
-        return result;
-    }
-
     private static List<String> ArrayToListNoTabArrayOrderStream(String[] animalsArray) {
         List<String> result = Arrays.stream(animalsArray)
                 .map(e -> e.replaceAll("[- ]", ""))
@@ -112,6 +102,16 @@ public class AnimalsMain {
         return result;
     }
 
+
+    private static List<String> ArrayToListNoTabArrayOrderLoop(String[] animalsArray) {
+        List<String> result = new ArrayList<>();
+        for (String animal : animalsArray) {
+            if (animal.trim().length() >= 1) {
+                result.add(animal.trim());
+            }
+        }
+        return result;
+    }
 
     private static List<String> ArrayToListNoTabStringOrderLoop(String[] animalsArray) {
         List<String> result = new ArrayList<>();
