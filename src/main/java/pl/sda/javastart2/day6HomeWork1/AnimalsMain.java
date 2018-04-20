@@ -26,7 +26,7 @@ public class AnimalsMain {
 //        ArrayToListNoTabStringOrderNoDuplicateStream(animals);
 //        ArrayToListNoTabNoDuplicateStream(animals);
 //        ArrayToSetArrayOrderNoDuplicateStream(animals);
-//        LastMethodFormTaskStram(animals);
+//        findElementInArrayToListStream(animals);
 
         printArray(animals);
 //        System.out.println(ArrayToListNoTabArrayOrderLoop(animals));
@@ -39,12 +39,22 @@ public class AnimalsMain {
 //        System.out.println("Ile jest pig: "+ howManyElementInArrayToListLoop(animals, "pig"));
 //        System.out.println("Ile jest rabbit: "+ howManyElementInArrayToListLoop(animals, "rabbit"));
 //        System.out.println("Ile jest olifant: "+ howManyElementInArrayToListLoop(animals, "olifant"));
-        System.out.println(ArrayToListNoTabArrayOrderStream(animals));
-        System.out.println(ArrayToListNoTabStringOrderStream(animals));
-        System.out.println(ArrayToListNoTabStringOrderNoDuplicateStream(animals));
-        System.out.println(ArrayToListNoTabNoDuplicateStream(animals));
-        System.out.println(ArrayToSetArrayOrderNoDuplicateStream(animals));
+//        System.out.println(ArrayToListNoTabArrayOrderStream(animals));
+//        System.out.println(ArrayToListNoTabStringOrderStream(animals));
+//        System.out.println(ArrayToListNoTabStringOrderNoDuplicateStream(animals));
+//        System.out.println(ArrayToListNoTabNoDuplicateStream(animals));
+//        System.out.println(ArrayToSetArrayOrderNoDuplicateStream(animals));
 
+        printAnyList(ArrayToSetArrayOrderNoDuplicateLoop(animals));
+
+
+
+    }
+
+    public static void printAnyList(Set<?> list){
+        for (Object o : list) {
+            System.out.print(o + ", ");
+        }
     }
 
     private static void printArray(String[] animals) {

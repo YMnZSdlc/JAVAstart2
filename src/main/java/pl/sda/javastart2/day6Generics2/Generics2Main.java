@@ -24,8 +24,6 @@ public class Generics2Main {
         Long[] longsArray = {1L, 2L};
         List list = GenericsUtils.fromArrayToList(longsArray);
         Object o = list.get(0);
-
         List<Long> longs = GenericsUtils.fromArrayToLIstWithGenerics(longsArray);
-
     }
 }
