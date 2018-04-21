@@ -2,17 +2,31 @@ package pl.sda.javastart2.day6HomeWork1;
 
 import com.google.common.collect.Lists;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class Colections1 {
+public class Colections2 {
     public static void main(String[] args) {
         giveMeNameAndSurnameList();
         giveMeNameAndSurnameListWithStream();
 
+    }
 
+    private static Map<Double, List<Customer>> sallaryWithCustomerList() {
+        List<Customer> customers = giveMeCustomers();
+        Map<Double, List<Customer>> map = new HashMap<>();
+        for (Customer customer : customers) {
+            if (map.containsKey(customer.getSalary())) {
+                List<Customer> customerInsideMap = map.get(customer.getSalary());
+                customerInsideMap.add(customer);
+            } else {
+//                List<Customer> newList = new ArrayList<>(); //stary sposób deklaracji
+//                newList.add(customer);                        //też dobry ale dłuższy
+                map.put(customer.getSalary(), Lists.newArrayList(customer));// nowy sposób
+                // deklaracji z użyciem biblioteki Guawa -> Lists
+            }
+        }
+        return map;
     }
 
     private static List<String> giveMeNameAndSurnameListWithStream() {
@@ -32,7 +46,6 @@ public class Colections1 {
         }
         return result;
     }
-
 
     private static List<Customer> giveMeCustomers() {
         Customer[] people = new Customer[]{

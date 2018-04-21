@@ -8,11 +8,11 @@ public class Customer {
     private String name;
     private String surName;
     private int age;
-    private int salary;
+    private double salary;
 
 
     public Customer(String name, String surName, int age, String salary) {
-        this(name, surName, age, Integer.parseInt(salary));
+        this(name, surName, age, Double.parseDouble(salary));
 //        this.id = counter++;
 //        this.name = name;
 //        this.surName = surName;
@@ -20,7 +20,7 @@ public class Customer {
 //        this.salary =Integer.parseInt(salary); //"3000" zmieni na liczbę 3000
     }
 
-    public Customer(String name, String surName, int age, int salary) {
+    public Customer(String name, String surName, int age, double salary) {
         this.id = counter++;
         this.name = name;
         this.surName = surName;
@@ -44,7 +44,7 @@ public class Customer {
         return age;
     }
 
-    public int getSalary() {
+    public double getSalary() {
         return salary;
     }
 
