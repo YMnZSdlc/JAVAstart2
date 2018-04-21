@@ -64,7 +64,7 @@ public class ArrayListExample {
         System.out.println(people);
 
         String result = people.stream()
-//                .sorted(Comparator.comparing(Person::getPesel)) //inny sposó sortowanai po pesel
+//                .sorted(Comparator.comparing(Person::getPesel)) //inny sposób sortowania po pesel
                 .sorted((a, b) -> a.getPesel().compareTo(b.getPesel())) //strumień ludzi z podaniem przepisu na porównanie pesel
                 .map(e -> e.getName()) //zmiana typu z Person na String ale już imiona
                 .collect(Collectors.joining(", "));
@@ -74,10 +74,10 @@ public class ArrayListExample {
         List<Integer> pesels =
                 people.stream() //strumień ludzi z listy people
                         .filter(person -> !person.getName().equals("Adam"))
-                        .sorted((firstPerson, seconPerson) -> firstPerson.getName().compareTo(seconPerson.getName()))
+                        .sorted((firstPerson, secondPerson) -> firstPerson.getName().compareTo(secondPerson.getName()))
                         .map(person -> person.getPesel()) //zmiana typu (opcjonalna) na String
                         .collect(Collectors.toList()); //collect czyli zbieranie do listy toList przy pomocy Collectors
-        System.out.println(pesels);     //colect jest funkcją kończącą strima, są też inne jak foreach
+        System.out.println(pesels);     //collect jest funkcją kończącą strima, są też inne jak foreach
 
 
     }
@@ -126,7 +126,7 @@ public class ArrayListExample {
 
 //        System.out.println(firstList.toString());
 //        System.out.println("Element at index 3: " + firstList.get(3));
-//        System.out.println("Does contein PERL? " + firstList.contains("PERL"));
+//        System.out.println("Does contain PERL? " + firstList.contains("PERL"));
         firstList.add(1, "JAVASCRIPT");
 //        System.out.println("After JAVASCRIPT added:" + firstList);
 

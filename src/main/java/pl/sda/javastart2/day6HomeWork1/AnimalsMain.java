@@ -1,5 +1,7 @@
 package pl.sda.javastart2.day6HomeWork1;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,7 +13,7 @@ public class AnimalsMain {
 
         String[] animals = new String[]{"cat", "dog ", "mouse", "rat", "pig",
                 "rabbit", "hamster", " ", "parrot", "cat", "", "dog", "cat",
-                "  pig", "dog"};
+                "  pig", "dog", null};
 
 
 //        ArrayToListNoTabLoop(animals);
@@ -48,10 +50,9 @@ public class AnimalsMain {
         printAnyList(ArrayToSetArrayOrderNoDuplicateLoop(animals));
 
 
-
     }
 
-    public static void printAnyList(Set<?> list){
+    public static void printAnyList(Set<?> list) {
         for (Object o : list) {
             System.out.print(o + ", ");
         }
@@ -102,14 +103,14 @@ public class AnimalsMain {
         return result;
     }
 
+//Napisz metodę przetwarzającą podaną tablicę animals na set z zachowaniem kolejności elementów
+//z oryginalnej tablicy + należy zapewnić poprawne wyeliminowanie duplikatów (" dog" "dog")
+
     private static Set<String> ArrayToSetArrayOrderNoDuplicateStream(String[] animalsArray) {
-        Set<String> result = new LinkedHashSet<>();
-        result = Arrays.stream(animalsArray)
-                .map(e -> e.replaceAll("[- ]", ""))
-                .filter(e -> !e.equals(""))
-                .distinct()
-                .collect(Collectors.toSet());
-        return result;
+        return Arrays.stream(animalsArray)
+                .filter(e -> StringUtils.isNoneBlank(e))
+                .map(e -> e.trim())
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
 
@@ -152,9 +153,8 @@ public class AnimalsMain {
     private static Set<String> ArrayToSetArrayOrderNoDuplicateLoop(String[] animalsArray) {
         Set<String> result = new LinkedHashSet<>();
         for (String animal : animalsArray) {
-            if (animal.trim().length() >= 1) {
-                result.add(animal.trim());
-            }
+            if (StringUtils.isBlank(animal)) continue;
+            result.add(animal);
         }
         return result;
     }
