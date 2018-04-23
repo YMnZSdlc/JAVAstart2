@@ -1,5 +1,7 @@
 package pl.sda.javastart2.day7text;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
@@ -10,12 +12,18 @@ public class TextOperations {
 //        classicContact("abc", iterations);
 //        builderConcat("abc", iterations);
         isAnagram("kaJak", "\"kkaaj\"");
-        isPalindrom("kajak");
+        isPalindrom("Marzena pokazała Zakopane z ram");
     }
 
     private static void isPalindrom(String text) {
+        text = text.replaceAll("\\W", "").toLowerCase();
 
+        char[] original = text.toCharArray();
+        char[] mirror = text.toCharArray();
+        ArrayUtils.reverse(mirror);
 
+        boolean result = Arrays.equals(original, mirror);
+        System.out.println(result);
     }
 
     private static void isAnagram(String text, String anagram) {
@@ -50,6 +58,4 @@ public class TextOperations {
         }
         System.out.println(Duration.between(start, Instant.now()));
     }
-
-
 }

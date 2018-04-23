@@ -1,15 +1,72 @@
 package pl.sda.javastart2.day6HomeWork1;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.sun.javafx.collections.MappingChange;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Colections2 {
     public static void main(String[] args) {
-        giveMeNameAndSurnameList();
-        giveMeNameAndSurnameListWithStream();
+//        giveMeNameAndSurnameList();
+//        giveMeNameAndSurnameListWithStream();
+//        SalaryStats();
+//        nameSalaryStats();
 
+        Map<String, Map<Double, Integer>> nameSalaryStats = nameSalaryStats();
+        iterateOverMap(nameSalaryStats);
+    }
+
+    private static void iterateOverMap(Map<String, Map<Double, Integer>> nameSalaryStats) {
+        for (String name : nameSalaryStats.keySet()) {
+            System.out.println(name);
+        }
+        System.out.println("+------------------------------------------");
+        for (Map<Double, Integer> integerMap : nameSalaryStats.values()) {
+            System.out.println(integerMap);
+        }
+
+        System.out.println("+------------------------------------------");
+        for (Map.Entry<String, Map<Double, Integer>> mapEntry : nameSalaryStats.entrySet()) {
+            System.out.println(mapEntry);
+        }
+    }
+
+    private static Map<Double, Integer> SalaryStats() {
+        List<Customer> customers = giveMeCustomers();
+        Map<Double, Integer> map = new HashMap<>();
+        for (Customer customer : customers) {
+            if (map.containsKey(customer.getSalary())) {
+                Integer counter = map.get(customer.getSalary());
+                map.replace(customer.getSalary(), counter + 1);
+            } else {
+                map.replace(customer.getSalary(), 1);
+            }
+        }
+        return map;
+    }
+
+    protected static Map<String, Map<Double, Integer>> nameSalaryStats() {
+        List<Customer> customers = giveMeCustomers();
+        customers.stream().forEach(e -> e.setName(e.getSurName().trim()));
+        Map<String, Map<Double, Integer>> resultMap = Maps.newHashMap();
+        for (Customer customer : customers) {
+            if (resultMap.containsKey(customer.getName())) {
+                Map<Double, Integer> innerMap = resultMap.get(customer.getName());
+                if (innerMap.containsKey(customer.getSalary())) {
+                    Integer counter = innerMap.get(customer.getSalary());
+                    innerMap.replace(customer.getSalary(), counter + 1);
+                } else {
+                    innerMap.put(customer.getSalary(), 1);
+                }
+            } else {
+                Map<Double, Integer> newMap = Maps.newHashMap();
+                newMap.put(customer.getSalary(), 1);
+                resultMap.put(customer.getName(), newMap);
+            }
+        }
+        return resultMap;
     }
 
     private static Map<Double, List<Customer>> sallaryWithCustomerList() {
