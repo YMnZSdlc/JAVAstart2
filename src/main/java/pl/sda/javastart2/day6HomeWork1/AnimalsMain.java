@@ -6,7 +6,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.sun.jmx.snmp.ThreadContext.contains;
+
 
 public class AnimalsMain {
     public static void main(String[] args) {
